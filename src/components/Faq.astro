@@ -1,0 +1,84 @@
+---
+const faqs = [
+  {
+    q: "Le devis est-il vraiment gratuit ?",
+    r: "Oui. Le diagnostic et l'estimation du prix sont communiqués avant tout déplacement facturé, directement dans la conversation WhatsApp.",
+  },
+  {
+    q: "Intervenez-vous le week-end ?",
+    r: "Selon les disponibilités. Indiquez votre créneau préféré dans la fiche, il sera confirmé ou ajusté par message.",
+  },
+  {
+    q: "Faut-il fournir la pièce détachée ?",
+    r: "Non, dans la majorité des cas la pièce est apportée directement. Elle peut être facturée en plus de l'intervention si besoin.",
+  },
+  {
+    q: "Que se passe-t-il si l'appareil n'est pas réparable ?",
+    r: "Le déplacement et le diagnostic restent dus, mais aucune réparation n'est facturée si elle n'est pas réalisée.",
+  },
+];
+---
+
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Questions fréquentes</span>
+      <h2>Avant d'envoyer votre fiche</h2>
+    </div>
+
+    <div class="faq-list">
+      {faqs.map((f) => (
+        <details class="faq-item">
+          <summary>{f.q}</summary>
+          <p>{f.r}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-list {
+    max-width: 760px;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--line-strong);
+    padding: 20px 0;
+  }
+  .faq-item:first-child {
+    border-top: 1px solid var(--line-strong);
+  }
+
+  summary {
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.02rem;
+    color: var(--ink);
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary::after {
+    content: "+";
+    font-family: var(--font-mono);
+    color: var(--blueprint);
+    font-size: 1.2rem;
+  }
+
+  details[open] summary::after {
+    content: "–";
+  }
+
+  .faq-item p {
+    margin-top: 14px;
+    color: var(--ink-soft);
+    max-width: 62ch;
+  }
+</style>

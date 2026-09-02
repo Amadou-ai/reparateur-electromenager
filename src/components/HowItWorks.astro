@@ -1,0 +1,91 @@
+---
+const steps = [
+  {
+    n: "01",
+    title: "Vous décrivez la panne",
+    text: "Remplissez la fiche d'intervention : appareil, marque, ville et description du problème. Deux minutes suffisent.",
+  },
+  {
+    n: "02",
+    title: "Le technicien vous répond sur WhatsApp",
+    text: "Votre fiche est envoyée directement en message. Vous échangez photos, disponibilités et recevez une estimation.",
+  },
+  {
+    n: "03",
+    title: "Intervention à domicile",
+    text: "Rendez-vous fixé ensemble, réparation sur place. Vous ne payez que si la réparation est acceptée.",
+  },
+];
+---
+
+<section id="comment-ca-marche">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Comment ça marche</span>
+      <h2>De la panne au rendez-vous, en trois étapes</h2>
+    </div>
+
+    <ol class="steps">
+      {steps.map((s, i) => (
+        <li class="step">
+          <span class="step-n">{s.n}</span>
+          <div>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    border-top: 1.5px solid var(--ink);
+    border-left: 1.5px solid var(--ink);
+  }
+
+  @media (min-width: 760px) {
+    .steps {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .step {
+    padding: 28px 26px 34px;
+    border-right: 1.5px solid var(--ink);
+    border-bottom: 1.5px solid var(--ink);
+    background: var(--paper-raised);
+  }
+
+  .step-n {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--amber-ink);
+    background: var(--amber);
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 2px;
+    margin-bottom: 16px;
+  }
+
+  .step h3 {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1.12rem;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .step p {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+  }
+
+</style>

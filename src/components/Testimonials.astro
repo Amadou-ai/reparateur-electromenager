@@ -1,0 +1,101 @@
+---
+const avis = [
+  {
+    nom: "Camille, Vincennes (94)",
+    appareil: "Lave-linge Bosch",
+    texte:
+      "Contact pris sur WhatsApp le matin, intervention l'après-midi même. La panne d'essorage était réglée en moins d'une heure.",
+  },
+  {
+    nom: "Karim, Paris 19e",
+    appareil: "Réfrigérateur Samsung",
+    texte:
+      "Diagnostic clair envoyé par message avant même le rendez-vous, avec le prix annoncé à l'avance. Aucune mauvaise surprise.",
+  },
+  {
+    nom: "Élise, Montreuil (93)",
+    appareil: "Four Whirlpool",
+    texte:
+      "Très pratique de tout gérer par messages plutôt que par téléphone. Le technicien a apporté la pièce directement.",
+  },
+];
+---
+
+<section id="avis">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Avis clients</span>
+      <h2>Ce qu'en disent les foyers dépannés</h2>
+    </div>
+
+    <div class="avis-grid">
+      {avis.map((a) => (
+        <figure class="avis-card">
+          <span class="stamp">Réparé</span>
+          <blockquote>{a.texte}</blockquote>
+          <figcaption>
+            <strong>{a.nom}</strong>
+            <span class="tag-mono">{a.appareil}</span>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .avis-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  @media (min-width: 860px) {
+    .avis-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+  }
+
+  .avis-card {
+    margin: 0;
+    padding: 28px 26px;
+    background: var(--paper-raised);
+    border: 1.5px solid var(--ink);
+    position: relative;
+  }
+
+  .stamp {
+    position: absolute;
+    top: 20px;
+    right: 22px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+    color: var(--green);
+    border: 1.4px solid var(--green);
+    border-radius: 2px;
+    padding: 2px 8px;
+    transform: rotate(6deg);
+  }
+
+  blockquote {
+    margin: 0 0 20px;
+    font-size: 1.02rem;
+    color: var(--ink);
+    line-height: 1.55;
+    max-width: 34ch;
+  }
+
+  figcaption {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 0.9rem;
+  }
+
+  figcaption .tag-mono {
+    color: var(--ink-soft);
+  }
+
+</style>

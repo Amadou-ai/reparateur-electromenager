@@ -1,0 +1,111 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <span class="tag-mono">Ibrahima Électroménager</span>
+      <p class="foot-lede">
+        Réparation d'électroménager à domicile, toutes marques, en
+        Île-de-France.
+      </p>
+    </div>
+
+    <div class="foot-col">
+      <h4>Contact</h4>
+      <p><a href="tel:+33600000000">06 00 00 00 00</a></p>
+      <p><a href="https://wa.me/33600000000" target="_blank" rel="noopener">WhatsApp direct</a></p>
+    </div>
+
+    <div class="foot-col">
+      <h4>Horaires</h4>
+      <p>Lun. – Sam. : 8h – 19h</p>
+      <p>Réponse WhatsApp sous 24h</p>
+    </div>
+
+    <div class="foot-col">
+      <h4>Zone</h4>
+      <p>Paris et petite/grande couronne</p>
+      <p>75 · 92 · 93 · 94 · 78 · 91 · 95 · 77</p>
+    </div>
+  </div>
+
+  <div class="wrap footer-bottom">
+    <span>© {year} Ibrahima Électroménager — artisan indépendant.</span>
+    <span>Mentions légales · SIRET à compléter</span>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--blueprint);
+    color: var(--paper);
+    padding-top: 64px;
+    border-top: 1.5px solid var(--ink);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding-bottom: 40px;
+  }
+
+  @media (min-width: 600px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+  }
+
+  @media (min-width: 960px) {
+    .footer-grid {
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    }
+  }
+
+  .footer-grid .tag-mono {
+    color: var(--amber);
+  }
+
+  .foot-lede {
+    margin-top: 12px;
+    color: #cdd6de;
+    max-width: 28ch;
+    font-size: 0.95rem;
+  }
+
+  .foot-col h4 {
+    font-family: var(--font-body);
+    color: var(--paper);
+    font-size: 0.92rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .foot-col p {
+    margin-top: 6px;
+    font-size: 0.92rem;
+  }
+
+  .foot-col a {
+    color: #cdd6de;
+    text-decoration: none;
+  }
+  .foot-col a:hover {
+    color: var(--amber);
+  }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 18px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    font-size: 0.8rem;
+    color: #9fb0bd;
+  }
+
+</style>

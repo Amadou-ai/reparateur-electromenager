@@ -1,0 +1,232 @@
+---
+// Numéro WhatsApp du réparateur, format international SANS le "+".
+// TODO : remplace par le vrai numéro avant mise en ligne.
+const WHATSAPP_NUMBER = "33600000000";
+---
+
+<section id="ticket">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Fiche d'intervention</span>
+      <h2>Décrivez la panne, on prend le relais sur WhatsApp</h2>
+      <p>
+        Ce formulaire ne fait rien d'autre que préparer votre message. Une
+        fois envoyé, WhatsApp s'ouvre avec la fiche déjà rédigée&nbsp;: à vous
+        de l'envoyer.
+      </p>
+    </div>
+
+    <div class="ticket-sheet sheet">
+      <div class="ticket-head">
+        <span class="tag-mono" id="dossier-number">N° DE FICHE — …</span>
+        <span class="tag-mono">STATUT — BROUILLON</span>
+      </div>
+
+      <form id="ticket-form" class="ticket-form" novalidate>
+        <div class="field">
+          <label for="nom">Nom complet</label>
+          <input id="nom" name="nom" type="text" required autocomplete="name" />
+        </div>
+
+        <div class="field">
+          <label for="tel">Téléphone</label>
+          <input id="tel" name="tel" type="tel" required autocomplete="tel" placeholder="06 12 34 56 78" />
+        </div>
+
+        <div class="field">
+          <label for="ville">Ville / code postal</label>
+          <input id="ville" name="ville" type="text" required placeholder="Ex. Vincennes, 94300" />
+        </div>
+
+        <div class="field">
+          <label for="appareil">Type d'appareil</label>
+          <select id="appareil" name="appareil" required>
+            <option value="">Sélectionner…</option>
+            <option>Lave-linge</option>
+            <option>Réfrigérateur / congélateur</option>
+            <option>Four</option>
+            <option>Plaque de cuisson</option>
+            <option>Lave-vaisselle</option>
+            <option>Sèche-linge</option>
+            <option>Hotte</option>
+            <option>Autre</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="marque">Marque (si connue)</label>
+          <input id="marque" name="marque" type="text" placeholder="Ex. Bosch, Whirlpool…" />
+        </div>
+
+        <div class="field">
+          <label for="urgence">Urgence</label>
+          <select id="urgence" name="urgence" required>
+            <option value="Dès que possible">Dès que possible</option>
+            <option value="Cette semaine">Cette semaine</option>
+            <option value="Pas urgent">Pas urgent</option>
+          </select>
+        </div>
+
+        <div class="field field-wide">
+          <label for="panne">Description de la panne</label>
+          <textarea id="panne" name="panne" rows="4" required placeholder="Ex. le lave-linge s'arrête en plein cycle d'essorage et fait un bruit de claquement."></textarea>
+        </div>
+
+        <div class="field field-wide">
+          <label for="creneau">Créneau préféré (optionnel)</label>
+          <input id="creneau" name="creneau" type="text" placeholder="Ex. mardi ou jeudi après-midi" />
+        </div>
+
+        <div class="field-wide ticket-submit">
+          <button type="submit" class="btn btn-primary">
+            Envoyer la fiche sur WhatsApp
+          </button>
+          <p class="ticket-note" id="ticket-note">
+            Les champs marqués sont nécessaires pour préparer votre message.
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ WHATSAPP_NUMBER }}>
+  const form = document.getElementById("ticket-form");
+  const dossierEl = document.getElementById("dossier-number");
+  const noteEl = document.getElementById("ticket-note");
+
+  function makeDossierNumber() {
+    const now = new Date();
+    const y = now.getFullYear();
+    const stamp = String(now.getTime()).slice(-5);
+    return `N° DE FICHE — ${y}-IDF-${stamp}`;
+  }
+
+  const dossierNumber = makeDossierNumber();
+  if (dossierEl) dossierEl.textContent = dossierNumber;
+
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    const data = new FormData(form);
+    const nom = data.get("nom");
+    const tel = data.get("tel");
+    const ville = data.get("ville");
+    const appareil = data.get("appareil");
+    const marque = data.get("marque") || "non précisée";
+    const urgence = data.get("urgence");
+    const panne = data.get("panne");
+    const creneau = data.get("creneau") || "à convenir";
+
+    const lines = [
+      `Bonjour, voici ma fiche d'intervention (${dossierNumber}).`,
+      ``,
+      `Nom : ${nom}`,
+      `Téléphone : ${tel}`,
+      `Ville / CP : ${ville}`,
+      `Appareil : ${appareil}`,
+      `Marque : ${marque}`,
+      `Urgence : ${urgence}`,
+      `Créneau souhaité : ${creneau}`,
+      ``,
+      `Description de la panne :`,
+      `${panne}`,
+    ];
+
+    const message = encodeURIComponent(lines.join("\n"));
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+
+    if (noteEl) {
+      noteEl.textContent = "Fiche prête — ouverture de WhatsApp…";
+    }
+
+    window.location.href = url;
+  });
+</script>
+
+<style>
+  .ticket-sheet {
+    padding: 40px clamp(20px, 4vw, 48px) 44px;
+  }
+
+  .ticket-head {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    margin-bottom: 28px;
+    border-bottom: 1px dashed var(--line-strong);
+  }
+
+  .ticket-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  @media (min-width: 640px) {
+    .ticket-form {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px 28px;
+    }
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .field-wide {
+    grid-column: 1 / -1;
+  }
+
+  label {
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: var(--blueprint);
+  }
+
+  input,
+  select,
+  textarea {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    padding: 12px 14px;
+    border: 1.4px solid var(--line-strong);
+    border-radius: 2px;
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    outline: 2px solid var(--blueprint);
+    outline-offset: 1px;
+    border-color: var(--blueprint);
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 96px;
+  }
+
+  .ticket-submit {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin-top: 6px;
+  }
+
+  .ticket-note {
+    font-size: 0.86rem;
+    color: var(--ink-soft);
+  }
+
+</style>

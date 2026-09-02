@@ -1,0 +1,202 @@
+/* ============================================================
+   RÉPARO IDF — Design tokens
+   Direction : fiche technique / bon d'intervention d'atelier.
+   Papier clair, encre bleu plan, accent ambre "plaque signalétique".
+   ============================================================ */
+
+:root {
+  /* Couleurs */
+  --paper: #eef1ec;
+  --paper-raised: #f7f8f4;
+  --ink: #12161b;
+  --ink-soft: #454f57;
+  --blueprint: #1e3a5f;
+  --blueprint-soft: #4a6d91;
+  --amber: #f2a900;
+  --amber-ink: #5c3d00;
+  --green: #4c7a6b;
+  --line: #c7cdc0;
+  --line-strong: #9aa39a;
+
+  /* Typo */
+  --font-display: "Big Shoulders Display", "Arial Narrow", sans-serif;
+  --font-body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  /* Rythme */
+  --sheet-max: 1180px;
+  --radius: 3px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 48px 48px;
+  background-position: -1px -1px;
+  background-attachment: fixed;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 0.95;
+  margin: 0;
+  color: var(--blueprint);
+}
+
+p {
+  margin: 0;
+}
+
+.wrap {
+  max-width: var(--sheet-max);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.sheet {
+  background: var(--paper-raised);
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius);
+  position: relative;
+}
+
+/* petites croix de repérage aux coins des blocs "plan" */
+.sheet::before,
+.sheet::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  top: -1px;
+  left: -1px;
+  border-top: 1.5px solid var(--blueprint);
+  border-left: 1.5px solid var(--blueprint);
+}
+.sheet::after {
+  left: auto;
+  right: -1px;
+  border-left: none;
+  border-right: 1.5px solid var(--blueprint);
+}
+
+.tag-mono {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.02em;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 14px 26px;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--ink);
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-primary {
+  background: var(--amber);
+  color: var(--amber-ink);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.btn-primary:hover {
+  box-shadow: 4px 4px 0 var(--ink);
+  transform: translate(-1px, -1px);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--blueprint);
+  border-color: var(--blueprint);
+}
+.btn-ghost:hover {
+  background: var(--blueprint);
+  color: var(--paper-raised);
+}
+
+section {
+  padding: 56px 0;
+  border-top: 1px solid var(--line-strong);
+}
+
+section:first-of-type {
+  border-top: none;
+}
+
+@media (min-width: 720px) {
+  section {
+    padding: 88px 0;
+  }
+}
+
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--green);
+  margin-bottom: 10px;
+  display: block;
+}
+
+.section-head {
+  max-width: 640px;
+  margin-bottom: 48px;
+}
+
+.section-head h2 {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+}
+
+.section-head p {
+  color: var(--ink-soft);
+  margin-top: 14px;
+  font-size: 1.05rem;
+}
