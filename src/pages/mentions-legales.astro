@@ -1,0 +1,125 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import WhatsAppFloat from "../components/WhatsAppFloat.astro";
+---
+
+<Layout
+  title="Mentions légales — Ibrahima Électroménager"
+  description="Mentions légales du site Ibrahima Électroménager, réparateur d'électroménager à domicile en Île-de-France."
+>
+  <Header />
+  <main>
+    <section class="legal">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="kicker">Informations légales</span>
+          <h1>Mentions légales</h1>
+        </div>
+
+        <div class="legal-body">
+          <p class="todo-note">
+            À compléter avant mise en ligne : les champs entre crochets sont
+            des exemples à remplacer par les informations réelles de
+            l'entreprise.
+          </p>
+
+          <h2>Éditeur du site</h2>
+          <p>
+            Le présent site est édité par [Prénom Nom / raison sociale],
+            entrepreneur individuel, réparateur d'électroménager à domicile.
+          </p>
+          <ul>
+            <li>Adresse : [adresse complète, ou ville si activité itinérante]</li>
+            <li>SIRET : [numéro SIRET]</li>
+            <li>Téléphone : [numéro de téléphone]</li>
+            <li>E-mail : [adresse e-mail de contact]</li>
+          </ul>
+
+          <h2>Directeur de la publication</h2>
+          <p>[Prénom Nom], en qualité d'exploitant individuel de l'activité.</p>
+
+          <h2>Hébergement</h2>
+          <p>
+            Le site est hébergé par [nom de l'hébergeur], [adresse de
+            l'hébergeur].
+          </p>
+
+          <h2>Propriété intellectuelle</h2>
+          <p>
+            L'ensemble des textes, illustrations et éléments graphiques
+            présents sur ce site est la propriété de l'éditeur, sauf mention
+            contraire. Toute reproduction, même partielle, est soumise à
+            autorisation préalable.
+          </p>
+
+          <h2>Données personnelles</h2>
+          <p>
+            Ce site ne dispose d'aucun serveur de collecte de données : le
+            formulaire de contact prépare uniquement un message qui est
+            transmis via WhatsApp, à l'initiative du visiteur. Les échanges
+            qui suivent sont ensuite soumis à la politique de
+            confidentialité de WhatsApp / Meta. Aucune donnée saisie dans le
+            formulaire n'est stockée par ce site.
+          </p>
+
+          <h2>Litiges</h2>
+          <p>
+            En cas de litige, une solution amiable sera recherchée avant
+            toute action judiciaire. À défaut, les tribunaux compétents
+            seront ceux du ressort du siège de l'éditeur.
+          </p>
+        </div>
+
+        <a href="/" class="btn btn-ghost back-link">Retour à l'accueil</a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+  <WhatsAppFloat />
+</Layout>
+
+<style>
+  .legal {
+    padding-top: 56px;
+  }
+
+  .legal-body {
+    max-width: 68ch;
+  }
+
+  .legal-body h2 {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    color: var(--ink);
+    margin-top: 36px;
+    margin-bottom: 10px;
+  }
+
+  .legal-body p {
+    color: var(--ink-soft);
+    margin-bottom: 8px;
+  }
+
+  .legal-body ul {
+    color: var(--ink-soft);
+    padding-left: 20px;
+    margin: 8px 0;
+  }
+
+  .todo-note {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    background: var(--amber);
+    color: var(--amber-ink);
+    padding: 12px 16px;
+    border-radius: 2px;
+    margin-bottom: 32px;
+  }
+
+  .back-link {
+    margin-top: 48px;
+    display: inline-flex;
+  }
+</style>

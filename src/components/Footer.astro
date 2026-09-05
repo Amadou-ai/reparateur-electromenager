@@ -33,7 +33,7 @@ const year = new Date().getFullYear();
 
   <div class="wrap footer-bottom">
     <span>© {year} Ibrahima Électroménager — artisan indépendant.</span>
-    <span>Mentions légales · SIRET à compléter</span>
+    <a href="/mentions-legales">Mentions légales</a>
   </div>
 </footer>
 
@@ -106,6 +106,13 @@ const year = new Date().getFullYear();
     border-top: 1px solid rgba(255, 255, 255, 0.15);
     font-size: 0.8rem;
     color: #9fb0bd;
+  }
+
+  .footer-bottom a {
+    color: #9fb0bd;
+  }
+  .footer-bottom a:hover {
+    color: var(--amber);
   }
 
 </style>

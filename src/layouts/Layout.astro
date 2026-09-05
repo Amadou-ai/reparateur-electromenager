@@ -4,12 +4,21 @@ import "../styles/global.css";
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
 }
 
 const {
   title = "Ibrahima Électroménager — Réparateur à domicile en Île-de-France",
   description = "Panne de lave-linge, four, réfrigérateur ou lave-vaisselle ? Réparation à domicile, toutes marques, en Île-de-France. Devis gratuit, réponse sous 24h via WhatsApp.",
+  image = "/images/technicien-reparation.png",
 } = Astro.props;
+
+// TODO : remplace par le vrai nom de domaine une fois le site déployé.
+// Les plateformes (WhatsApp, réseaux sociaux) ont besoin d'une URL absolue
+// pour afficher correctement l'aperçu du lien.
+const SITE_URL = "https://ibrahima-electromenager.fr";
+const canonicalURL = new URL(Astro.url.pathname, SITE_URL).toString();
+const imageURL = new URL(image, SITE_URL).toString();
 ---
 
 <!doctype html>
@@ -18,8 +27,26 @@ const {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalURL} />
     <title>{title}</title>
     <meta name="description" content={description} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Ibrahima Électroménager" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={imageURL} />
+    <meta property="og:image:width" content="850" />
+    <meta property="og:image:height" content="523" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageURL} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
